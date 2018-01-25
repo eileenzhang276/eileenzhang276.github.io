@@ -15,7 +15,7 @@
 <meta property="og:description" content="Some standard method in a viewCreate:   Constructor: Called for creating view in code OR inflating from XML. We can have different types of constructors defined.   onFinishInflate: Called when view an">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://tekeye.uk/android/images/android_coordinate_system.png">
-<meta property="og:updated_time" content="2018-01-24T07:04:18.000Z">
+<meta property="og:updated_time" content="2018-01-25T07:27:35.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="7-About Android view">
 <meta name="twitter:description" content="Some standard method in a viewCreate:   Constructor: Called for creating view in code OR inflating from XML. We can have different types of constructors defined.   onFinishInflate: Called when view an">
@@ -99,7 +99,7 @@
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Some-standard-method-in-a-view"><span class="toc-number">1.</span> <span class="toc-text">Some standard method in a view</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Position-Coordinator"><span class="toc-number">2.</span> <span class="toc-text">Position Coordinator</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Some-standard-method-in-a-view"><span class="toc-number">1.</span> <span class="toc-text">Some standard method in a view</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Position-Coordinator"><span class="toc-number">2.</span> <span class="toc-text">Position Coordinator</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Size"><span class="toc-number">3.</span> <span class="toc-text">Size</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Measured-height-and-width"><span class="toc-number">3.1.</span> <span class="toc-text">Measured height and width</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Height-and-width"><span class="toc-number">3.2.</span> <span class="toc-text">Height and width</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Dimension"><span class="toc-number">4.</span> <span class="toc-text">Dimension</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Layout-Process"><span class="toc-number">5.</span> <span class="toc-text">Layout Process</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Measure"><span class="toc-number">5.1.</span> <span class="toc-text">Measure:</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-UNSPECIFIED"><span class="toc-number">5.1.1.</span> <span class="toc-text">1-UNSPECIFIED</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-EXACTLY"><span class="toc-number">5.1.2.</span> <span class="toc-text">2-EXACTLY</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-AT-MOST"><span class="toc-number">5.1.3.</span> <span class="toc-text">3-AT_MOST</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Layout"><span class="toc-number">5.2.</span> <span class="toc-text">Layout:</span></a></li></ol></li></ol>
     </div>
   </span>
 </div>
@@ -156,6 +156,21 @@
 <p>If you want to implement a custom view (say a chevron), you can start to just override the onDraw method.</p>
 <h2 id="Position-Coordinator"><a href="#Position-Coordinator" class="headerlink" title="Position Coordinator"></a>Position Coordinator</h2><p>Android view coordinator origin point is on the top left, as shown in the below.<br><img src="http://tekeye.uk/android/images/android_coordinate_system.png" alt="android pixel"></p>
 <p>We can use getLeft(), getTop(), getBottom(), and getRight() to know the coordinate of the view so that we know its position. Actually getLeft() and getTop() are the most useful ones, and getBottom() and getRight() are just convenient values that can be calculated.</p>
+<h2 id="Size"><a href="#Size" class="headerlink" title="Size"></a>Size</h2><p>There are 2 set of height and width. </p>
+<h3 id="Measured-height-and-width"><a href="#Measured-height-and-width" class="headerlink" title="Measured height and width"></a>Measured height and width</h3><p>How large does the view want to be? </p>
+<h3 id="Height-and-width"><a href="#Height-and-width" class="headerlink" title="Height and width"></a>Height and width</h3><p>The acutal size of the view on screen at drawing time.</p>
+<p>Normally we think it’s more reliable to use getMeasuredHeight and getMeasuredWidth. </p>
+<p>Sometimes, we may not get the height and width as we want if we attach a listener on the layout change. The solution is to post a runnable to return the size on the view, and it will be executed on layout.</p>
+<h2 id="Dimension"><a href="#Dimension" class="headerlink" title="Dimension"></a>Dimension</h2><p>View has support to set and query for padding.<br>ViewGroup has support to set and query for margin. This is useful, for example: we can change the Layout margin to smartly hide/show the layout below it in the Lemonade project implementation to show the collapsed sprouts view. </p>
+<h2 id="Layout-Process"><a href="#Layout-Process" class="headerlink" title="Layout Process"></a>Layout Process</h2><p>Layout process includes 2 parts: measure pass and layout pass. </p>
+<h3 id="Measure"><a href="#Measure" class="headerlink" title="Measure:"></a>Measure:</h3><p>From top-down to calculate the specs of each view. When it’s done, the view’s getMeasuredHeight() and getMeasuredWidth() should be set.</p>
+<p>Note that the measure() method can be called multiple times by the parent. First time with no constraint to check how large the child want to be; second time with contraint if not all children can have their desired specs.</p>
+<p>measure() can use View.MeasureSpec to specific a value in 3 different mode:</p>
+<h4 id="1-UNSPECIFIED"><a href="#1-UNSPECIFIED" class="headerlink" title="1-UNSPECIFIED"></a>1-UNSPECIFIED</h4><p>Will be determined by children.</p>
+<h4 id="2-EXACTLY"><a href="#2-EXACTLY" class="headerlink" title="2-EXACTLY"></a>2-EXACTLY</h4><p>Be sure that the children will use this size.</p>
+<h4 id="3-AT-MOST"><a href="#3-AT-MOST" class="headerlink" title="3-AT_MOST"></a>3-AT_MOST</h4><p>Be sure that the children will fit in this size.</p>
+<h3 id="Layout"><a href="#Layout" class="headerlink" title="Layout:"></a>Layout:</h3><p>From top-down, to layout all the child of each view using the specs calculated in the first pass.</p>
+<p>When the view believes it no longer fits into the current bounds (e.g., dynamically we want to add a bottom margin to a view based on some condition), we call requestLayout() to initiate a layout.</p>
 
   </div>
 </article>
@@ -182,7 +197,7 @@
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Some-standard-method-in-a-view"><span class="toc-number">1.</span> <span class="toc-text">Some standard method in a view</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Position-Coordinator"><span class="toc-number">2.</span> <span class="toc-text">Position Coordinator</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Some-standard-method-in-a-view"><span class="toc-number">1.</span> <span class="toc-text">Some standard method in a view</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Position-Coordinator"><span class="toc-number">2.</span> <span class="toc-text">Position Coordinator</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Size"><span class="toc-number">3.</span> <span class="toc-text">Size</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Measured-height-and-width"><span class="toc-number">3.1.</span> <span class="toc-text">Measured height and width</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Height-and-width"><span class="toc-number">3.2.</span> <span class="toc-text">Height and width</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Dimension"><span class="toc-number">4.</span> <span class="toc-text">Dimension</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Layout-Process"><span class="toc-number">5.</span> <span class="toc-text">Layout Process</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Measure"><span class="toc-number">5.1.</span> <span class="toc-text">Measure:</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-UNSPECIFIED"><span class="toc-number">5.1.1.</span> <span class="toc-text">1-UNSPECIFIED</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-EXACTLY"><span class="toc-number">5.1.2.</span> <span class="toc-text">2-EXACTLY</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-AT-MOST"><span class="toc-number">5.1.3.</span> <span class="toc-text">3-AT_MOST</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Layout"><span class="toc-number">5.2.</span> <span class="toc-text">Layout:</span></a></li></ol></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">

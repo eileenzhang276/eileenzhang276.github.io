@@ -13,10 +13,13 @@
 <meta property="og:site_name" content="走路草的博客">
 <meta property="og:description" content="This blog will focus on how to use callback in a component. What is callback?Callback is a piece of executable code that can be passed around as an argument. It can be called to get executed whenever">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-01-28T07:43:43.000Z">
+<meta property="og:image" content="https://i.imgur.com/U79FSCJ.jpg">
+<meta property="og:image" content="https://i.imgur.com/WdJWgTD.jpg">
+<meta property="og:updated_time" content="2018-01-28T22:35:34.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="8-Some Thoughts About Callback">
 <meta name="twitter:description" content="This blog will focus on how to use callback in a component. What is callback?Callback is a piece of executable code that can be passed around as an argument. It can be called to get executed whenever">
+<meta name="twitter:image" content="https://i.imgur.com/U79FSCJ.jpg">
     
     
         
@@ -98,7 +101,7 @@
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#What-is-callback"><span class="toc-number">1.</span> <span class="toc-text">What is callback?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Why-do-we-need-callback-in-component"><span class="toc-number">2.</span> <span class="toc-text">Why do we need callback in component?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#When-do-we-need-callback"><span class="toc-number">3.</span> <span class="toc-text">When do we need callback?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Where-do-we-define-callback-interface"><span class="toc-number">4.</span> <span class="toc-text">Where do we define callback interface?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Where-do-we-create-implementation-for-callback"><span class="toc-number">5.</span> <span class="toc-text">Where do we create implementation for callback?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#How-do-we-pass-around-a-callback-method"><span class="toc-number">6.</span> <span class="toc-text">How do we pass around a callback method?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Look-at-an-example"><span class="toc-number">7.</span> <span class="toc-text">Look at an example:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Some-more-thoughts"><span class="toc-number">8.</span> <span class="toc-text">Some more thoughts</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#What-is-callback"><span class="toc-number">1.</span> <span class="toc-text">What is callback?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Why-do-we-need-callback-in-component"><span class="toc-number">2.</span> <span class="toc-text">Why do we need callback in component?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#When-do-we-need-callback"><span class="toc-number">3.</span> <span class="toc-text">When do we need callback?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Where-do-we-define-callback-interface"><span class="toc-number">4.</span> <span class="toc-text">Where do we define callback interface?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Where-do-we-create-implementation-for-callback"><span class="toc-number">5.</span> <span class="toc-text">Where do we create implementation for callback?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#How-do-we-pass-around-a-callback-method"><span class="toc-number">6.</span> <span class="toc-text">How do we pass around a callback method?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Look-at-some-examples"><span class="toc-number">7.</span> <span class="toc-text">Look at some examples</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Some-more-thoughts"><span class="toc-number">8.</span> <span class="toc-text">Some more thoughts</span></a></li></ol>
     </div>
   </span>
 </div>
@@ -144,7 +147,8 @@
 <p>Next, think about is there data we want from the controller’s calculation so that we can use it directly in the child component? If yes, give the callback a return value, if not, leave the return value as void.</p>
 <p>Then, we implement the callback in the controller where we want to create our root component.</p>
 <p>Finally, pass this callback as a property when we create our root component.</p>
-<h2 id="Look-at-an-example"><a href="#Look-at-an-example" class="headerlink" title="Look at an example:"></a>Look at an example:</h2><pre><code>RootComponentSpec {
+<h2 id="Look-at-some-examples"><a href="#Look-at-some-examples" class="headerlink" title="Look at some examples"></a>Look at some examples</h2><p>This will be a general pattern:</p>
+<pre><code>RootComponentSpec {
     Callback {
         doSomething();
     }
@@ -167,8 +171,25 @@ ChildComponentSpec {
         mCallback.doSomething();
     }
 }
-</code></pre><h2 id="Some-more-thoughts"><a href="#Some-more-thoughts" class="headerlink" title="Some more thoughts"></a>Some more thoughts</h2><ul>
-<li>Callbacks associated with components are like clickHandlers. Components are UI elements and can’t not handle some click events. So these events needs to be handled by controller and callbacks are like a bridge to let component to directly talk to controller: Hey, I am clicked! Please do whatever you’re supposed to do!</li>
+</code></pre><p><strong>Real Examples</strong></p>
+<p>When looking for callbacks, first think about what are the user events we want to handle?</p>
+<ul>
+<li>Click media to select media </li>
+<li>Click media to add to composer</li>
+<li>Click permission block to ask for permission</li>
+<li>Click camera to launch full screen camera</li>
+<li>Click capture button to capture a photo</li>
+<li>Click rotate button to rotate the screen</li>
+<li>Click flash button to change the flash options</li>
+</ul>
+<p>The first 3 are related to the left part of the camera row, so they can be inside callback interface 1. the last 4 are related to the right part of the camera row, so they will be inside callback interface 2. </p>
+<p>Example 1:<br><img src="https://i.imgur.com/U79FSCJ.jpg" alt="About the media callback"></p>
+<p>Example 2:<br><img src="https://i.imgur.com/WdJWgTD.jpg" alt="About the camera callbakc"></p>
+<h2 id="Some-more-thoughts"><a href="#Some-more-thoughts" class="headerlink" title="Some more thoughts"></a>Some more thoughts</h2><ul>
+<li><p>Callbacks associated with components are like clickHandlers. Components are UI elements and can’t not handle some click events. So these events needs to be handled by controller and callbacks are like a bridge to let component to directly talk to controller: Hey, I am clicked! Please do whatever you’re supposed to do!</p>
+</li>
+<li><p>Callbacks are like questionaires defined by UI component. UI put all the questions it doesn’t know where and ask controller for help. Controller answers all the questions in the questionaire, pass it to component when initiating the component.</p>
+</li>
 </ul>
 
   </div>
@@ -196,7 +217,7 @@ ChildComponentSpec {
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#What-is-callback"><span class="toc-number">1.</span> <span class="toc-text">What is callback?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Why-do-we-need-callback-in-component"><span class="toc-number">2.</span> <span class="toc-text">Why do we need callback in component?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#When-do-we-need-callback"><span class="toc-number">3.</span> <span class="toc-text">When do we need callback?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Where-do-we-define-callback-interface"><span class="toc-number">4.</span> <span class="toc-text">Where do we define callback interface?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Where-do-we-create-implementation-for-callback"><span class="toc-number">5.</span> <span class="toc-text">Where do we create implementation for callback?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#How-do-we-pass-around-a-callback-method"><span class="toc-number">6.</span> <span class="toc-text">How do we pass around a callback method?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Look-at-an-example"><span class="toc-number">7.</span> <span class="toc-text">Look at an example:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Some-more-thoughts"><span class="toc-number">8.</span> <span class="toc-text">Some more thoughts</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#What-is-callback"><span class="toc-number">1.</span> <span class="toc-text">What is callback?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Why-do-we-need-callback-in-component"><span class="toc-number">2.</span> <span class="toc-text">Why do we need callback in component?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#When-do-we-need-callback"><span class="toc-number">3.</span> <span class="toc-text">When do we need callback?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Where-do-we-define-callback-interface"><span class="toc-number">4.</span> <span class="toc-text">Where do we define callback interface?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Where-do-we-create-implementation-for-callback"><span class="toc-number">5.</span> <span class="toc-text">Where do we create implementation for callback?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#How-do-we-pass-around-a-callback-method"><span class="toc-number">6.</span> <span class="toc-text">How do we pass around a callback method?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Look-at-some-examples"><span class="toc-number">7.</span> <span class="toc-text">Look at some examples</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Some-more-thoughts"><span class="toc-number">8.</span> <span class="toc-text">Some more thoughts</span></a></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">

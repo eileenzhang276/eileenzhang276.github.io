@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="What is “State?There are 2 types of information a component can receive: Props and State.  Props is sent from parent and can not be changed during the component lifecycle. State is what component main">
+<meta property="og:type" content="article">
+<meta property="og:title" content="State Of Component">
+<meta property="og:url" content="http://yoursite.com/2018/01/28/10_State_Of_Component/index.html">
+<meta property="og:site_name" content="走路草的博客">
+<meta property="og:description" content="What is “State?There are 2 types of information a component can receive: Props and State.  Props is sent from parent and can not be changed during the component lifecycle. State is what component main">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-01-29T06:01:34.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="State Of Component">
+<meta name="twitter:description" content="What is “State?There are 2 types of information a component can receive: Props and State.  Props is sent from parent and can not be changed during the component lifecycle. State is what component main">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>State Of Component</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- rss -->
+    
+    
+</head>
+
+<body>
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="http://github.com/probberechts">Projects</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" href="/2018/01/27/9_Camera_Roll_Select_And_Deselect/"><i class="fa fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fa fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2018/01/28/10_State_Of_Component/"><i class="fa fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2018/01/28/10_State_Of_Component/&text=State Of Component"><i class="fa fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2018/01/28/10_State_Of_Component/&title=State Of Component"><i class="fa fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2018/01/28/10_State_Of_Component/&is_video=false&description=State Of Component"><i class="fa fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=State Of Component&body=Check out this article: http://yoursite.com/2018/01/28/10_State_Of_Component/"><i class="fa fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2018/01/28/10_State_Of_Component/&title=State Of Component"><i class="fa fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2018/01/28/10_State_Of_Component/&title=State Of Component"><i class="fa fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2018/01/28/10_State_Of_Component/&title=State Of Component"><i class="fa fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2018/01/28/10_State_Of_Component/&title=State Of Component"><i class="fa fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2018/01/28/10_State_Of_Component/&name=State Of Component&description="><i class="fa fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#What-is-“State"><span class="toc-number">1.</span> <span class="toc-text">What is “State?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Declare-State"><span class="toc-number">2.</span> <span class="toc-text">Declare State</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Initialize-State"><span class="toc-number">3.</span> <span class="toc-text">Initialize State</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Define-State-Updates"><span class="toc-number">4.</span> <span class="toc-text">Define State Updates</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Call-State-Updates"><span class="toc-number">5.</span> <span class="toc-text">Call State Updates</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Keys-to-Identify-Components"><span class="toc-number">6.</span> <span class="toc-text">Keys to Identify Components</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Autogenerated-Keys"><span class="toc-number">6.1.</span> <span class="toc-text">Autogenerated Keys</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Manual-Keys"><span class="toc-number">6.2.</span> <span class="toc-text">Manual Keys</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Lazy-state-Updates"><span class="toc-number">7.</span> <span class="toc-text">Lazy state Updates</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Immutability"><span class="toc-number">8.</span> <span class="toc-text">Immutability</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index width mx-auto px2 my4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        State Of Component
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">走路草的博客</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2018-01-29T05:21:03.000Z" itemprop="datePublished">2018-01-28</time>
+    </div>
+
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h2 id="What-is-“State"><a href="#What-is-“State" class="headerlink" title="What is “State?"></a>What is “State?</h2><p>There are 2 types of information a component can receive: Props and State. </p>
+<p>Props is sent from parent and can not be changed during the component lifecycle.</p>
+<p>State is what component maintains and encapsulates inside component. Parent does not need to know this information.</p>
+<p>For example the rendering of checkbox, we keep this checkbox state as a state value. Click event can be received on component and component knows exactly what to do about these click events. In this case, no need to define callback to let parent to tell what to do, keep a state value inside component and use it for rendering.</p>
+<h2 id="Declare-State"><a href="#Declare-State" class="headerlink" title="Declare State"></a>Declare State</h2><p>Exactly like @Props, just use @State before the state value. Can be used in @OnCreateLayout, @OnEvent, lifecycle methods. </p>
+<h2 id="Initialize-State"><a href="#Initialize-State" class="headerlink" title="Initialize State"></a>Initialize State</h2><pre><code>@LayoutSpec
+public class CheckboxSpec {
+
+  @OnCreateInitialState
+  static void createInitialState(
+      ComponentContext c,
+      StateValue&lt;Boolean&gt; isChecked,
+      @Prop boolean initChecked) {
+
+    isChecked.set(initChecked);
+  }
+}
+</code></pre><p>Note that you don’t have to define an initialization. If you don’t, java default value will be used.</p>
+<p>@OnCreateInitialState will only be called once when it’s added to componentTree. Layout recalculation will not call it again.</p>
+<h2 id="Define-State-Updates"><a href="#Define-State-Updates" class="headerlink" title="Define State Updates"></a>Define State Updates</h2><pre><code>@LayoutSpec
+public class CheckboxSpec {
+
+  @OnUpdateState
+  static void updateCheckboxState(StateValue&lt;Boolean&gt; isChecked) {
+    isChecked.set(!isChecked.get());
+  }
+}
+</code></pre><p>You can have as many as @OnUpdateSate.</p>
+<p>However, when there is a stateUpdate called, layout will be recalculated. So bundling multiple state updates will improve performance. </p>
+<h2 id="Call-State-Updates"><a href="#Call-State-Updates" class="headerlink" title="Call State Updates"></a>Call State Updates</h2><pre><code>@OnEvent(ClickEvent.class)
+  static void onCheckboxClicked(ComponentContext c) {
+    Checkbox.updateCheckboxAsync(c);
+    // Checkbox.updateCheckbox(c); for a sync update
+  }
+  }
+</code></pre><p>When calling state update, just need to pass in component context and all the Props defined in @OnUpdateState. No need to mention the state itself.</p>
+<p>Keep in mind that calling state update will trigger a new layout recalculation. This will cause indefinite loop pretty easily. So try to avoid calling state update in onCreateLayout, bind, mount. </p>
+<h2 id="Keys-to-Identify-Components"><a href="#Keys-to-Identify-Components" class="headerlink" title="Keys to Identify Components"></a>Keys to Identify Components</h2><h3 id="Autogenerated-Keys"><a href="#Autogenerated-Keys" class="headerlink" title="Autogenerated Keys"></a>Autogenerated Keys</h3><p>Framework will auto-generate keys for each component based on its type and the key of its parent. This key is used to finding the specific component when doing update. </p>
+<p>If the same parent have multiple same type children, they will have same keys. Framework will auto-generate one based on the order that they are added. </p>
+<p>However, if the order of components will change, then framework will fail to detect the right component. So if you expect your components to move around, you have to assign manual keys.</p>
+<h3 id="Manual-Keys"><a href="#Manual-Keys" class="headerlink" title="Manual Keys"></a>Manual Keys</h3><pre><code>@OnCreateLayout
+static Component onCreateLayout(
+    ComponentContext c,
+    @State boolean isChecked) {
+
+  final Component.Builder parent = Column.create(c);
+  for (int i = 0; i &lt; 10; i++) {
+    parent.child(Text.create(c).key(&quot;key&quot; +i));
+  }
+  return parent.build();
+}
+</code></pre><h2 id="Lazy-state-Updates"><a href="#Lazy-state-Updates" class="headerlink" title="Lazy state Updates"></a>Lazy state Updates</h2><p>When you want to update a state value but do not need to immediately trigger a layout recalculation, use lazy state update. </p>
+<p>This is useful to hold some information internally in component for the use of next time rendering.</p>
+<pre><code>@OnCreateLayout
+static Component onCreateLayout(
+    final ComponentContext c,
+    @State(canUpdateLazily = true) String foo) {
+
+  FooComponent.lazyUpdateFoo(context, &quot;updated foo&quot;);
+  return Column.create(c)
+      .child(
+          Text.create(c)
+              .text(foo))
+      .build();
+}
+
+@OnCreateInitialState
+static void onCreateInitialState(
+    ComponentContext c,
+    StateValue&lt;String&gt; foo) {
+  foo.set(&quot;first foo&quot;);
+}
+</code></pre><h2 id="Immutability"><a href="#Immutability" class="headerlink" title="Immutability"></a>Immutability</h2><p>State has to be immutable (better to be primitive type) for the sake of background layout.</p>
+
+  </div>
+</article>
+
+
+
+    </div>
+    
+      <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="http://github.com/probberechts">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#What-is-“State"><span class="toc-number">1.</span> <span class="toc-text">What is “State?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Declare-State"><span class="toc-number">2.</span> <span class="toc-text">Declare State</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Initialize-State"><span class="toc-number">3.</span> <span class="toc-text">Initialize State</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Define-State-Updates"><span class="toc-number">4.</span> <span class="toc-text">Define State Updates</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Call-State-Updates"><span class="toc-number">5.</span> <span class="toc-text">Call State Updates</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Keys-to-Identify-Components"><span class="toc-number">6.</span> <span class="toc-text">Keys to Identify Components</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Autogenerated-Keys"><span class="toc-number">6.1.</span> <span class="toc-text">Autogenerated Keys</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Manual-Keys"><span class="toc-number">6.2.</span> <span class="toc-text">Manual Keys</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Lazy-state-Updates"><span class="toc-number">7.</span> <span class="toc-text">Lazy state Updates</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Immutability"><span class="toc-number">8.</span> <span class="toc-text">Immutability</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2018/01/28/10_State_Of_Component/"><i class="fa fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2018/01/28/10_State_Of_Component/&text=State Of Component"><i class="fa fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2018/01/28/10_State_Of_Component/&title=State Of Component"><i class="fa fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2018/01/28/10_State_Of_Component/&is_video=false&description=State Of Component"><i class="fa fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=State Of Component&body=Check out this article: http://yoursite.com/2018/01/28/10_State_Of_Component/"><i class="fa fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2018/01/28/10_State_Of_Component/&title=State Of Component"><i class="fa fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2018/01/28/10_State_Of_Component/&title=State Of Component"><i class="fa fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2018/01/28/10_State_Of_Component/&title=State Of Component"><i class="fa fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2018/01/28/10_State_Of_Component/&title=State Of Component"><i class="fa fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2018/01/28/10_State_Of_Component/&name=State Of Component&description="><i class="fa fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+      <ul>
+        <li id="toc"><a class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa fa-list fa-lg" aria-hidden="true"></i> TOC</a></li>
+        <li id="share"><a class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa fa-share-alt fa-lg" aria-hidden="true"></i> Share</a></li>
+        <li id="top" style="display:none"><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a></li>
+        <li id="menu"><a class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa fa-bars fa-lg" aria-hidden="true"></i> Menu</a></li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+    
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2018 走路草
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="http://github.com/probberechts">Projects</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>
+<!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="/lib/meslo-LG/styles.css">
+<link rel="stylesheet" href="/lib/justified-gallery/justifiedGallery.min.css">
+
+<!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+    <script type="text/javascript">
+        (function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-86660611-1', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+<!-- Disqus Comments -->
+
+
